@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
     app:startDestination="@id/task_screen">
 
@@ -8,8 +9,13 @@
         android:id="@+id/task_screen"
         android:name="com.example.todoapp.task.TaskFragment"
         android:label="tasks"
-
-
+        tools:layout="@layout/activity_task"
         />
+    <fragment
+        android:id="@+id/statitisticsFragment"
+        android:name="com.example.todoapp.statistics.StatitisticsFragment"
+        android:label="fragment_statitistics"
+        tools:layout="@layout/fragment_statitistics" />
+
 
 </navigation>
