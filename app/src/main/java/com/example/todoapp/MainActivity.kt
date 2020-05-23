@@ -2,6 +2,7 @@ package com.example.todoapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+//        setSupportActionBar(findViewById(R.id.toolbar))
 
         navController = Navigation.findNavController(this,R.id.nav_host)
         nav_view.setupWithNavController(navController)
@@ -29,6 +31,11 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onSupportNavigateUp(): Boolean {
+
+       return  if(nav_drawer.isDrawerOpen(GravityCompat.START)){
+            nav_drawer.closeDrawer(GravityCompat.START)
+            true
+        }else
         return findNavController(R.id.nav_host).navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
