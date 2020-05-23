@@ -19,9 +19,10 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this,R.id.nav_host)
         nav_view.setupWithNavController(navController)
         appBarConfiguration =
-            AppBarConfiguration.Builder(R.id.tasks_fragment_dest, R.id.statistics_fragment_dest)
+            AppBarConfiguration.Builder(R.id.tasks_fragment_dest)
                 .setDrawerLayout(nav_drawer)
                 .build()
+
 //        NavigationUI.setupActionBarWithNavController(this,navController,nav_drawer)
         setupActionBarWithNavController(navController,appBarConfiguration)
     }

@@ -4,12 +4,12 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/task"
+            android:id="@+id/tasks_fragment_dest"
             android:title="Task"
             android:icon="@drawable/abc_vector_test"
             />
 
-        <item android:id="@+id/statistics"
+        <item android:id="@+id/statistics_fragment_dest"
                android:title="Statistics"
                android:icon="@drawable/ic_launcher_background"/>
 </group>
