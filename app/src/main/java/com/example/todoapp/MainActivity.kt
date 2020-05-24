@@ -35,9 +35,10 @@ class MainActivity : AppCompatActivity() {
        return  if(nav_drawer.isDrawerOpen(GravityCompat.START)){
             nav_drawer.closeDrawer(GravityCompat.START)
             true
-        }else
-        return findNavController(R.id.nav_host).navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        }else {
+             findNavController(R.id.nav_host).navigateUp(appBarConfiguration)
+                   || super.onSupportNavigateUp()
+       }
     }
 
 }
