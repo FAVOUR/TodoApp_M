@@ -18,7 +18,7 @@ interface TaskDao {
      */
 
        @Query("Select * from Task")
-         fun ObserveAll():LiveData<List<Task>>
+         fun observeTasks():LiveData<List<Task>>
 
 
     /**
