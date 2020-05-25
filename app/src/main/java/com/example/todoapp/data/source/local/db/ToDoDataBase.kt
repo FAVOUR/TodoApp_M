@@ -11,16 +11,16 @@ abstract class ToDoDataBase : RoomDatabase() {
 
    abstract  fun taskDoa() :TaskDao
 
-    companion object{
-      @Volatile
-      private lateinit var  INSTANCE : ToDoDataBase
-        @Synchronized
-           fun setupDatabase(context: Context){
-               if(INSTANCE == null){
-                   INSTANCE = Room.databaseBuilder(context,ToDoDataBase::class.java,"tododb")
-                                  .fallbackToDestructiveMigration()
-                                  .build()
-               }
-           }
-       }
+//    companion object{
+//      @Volatile
+//      private lateinit var  INSTANCE : ToDoDataBase
+//        @Synchronized
+//           fun setupDatabase(context: Context){
+//               if(INSTANCE == null){
+//                   INSTANCE = Room.databaseBuilder(context,ToDoDataBase::class.java,"tododb")
+//                                  .fallbackToDestructiveMigration()
+//                                  .build()
+//               }
+//           }
+//       }
 }
