@@ -17,7 +17,6 @@ class TaskAdapter(private val viewModel :TaskViewModel):ListAdapter<Task,TaskRv>
 
     override fun onBindViewHolder(holder: TaskRv, position: Int) {
         val item = getItem(position)
-
         holder.bind(viewModel, item)
     }
 
