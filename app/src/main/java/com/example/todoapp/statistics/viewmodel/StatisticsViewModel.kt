@@ -37,7 +37,7 @@ class StatisticsViewModel(application: Application) :AndroidViewModel(applicatio
         mDataLoading.value= true
 
         viewModelScope.launch {
-            defaultTaskRepository.refresh()
+            defaultTaskRepository.refreshTasks()
             mDataLoading.value = false
         }
 

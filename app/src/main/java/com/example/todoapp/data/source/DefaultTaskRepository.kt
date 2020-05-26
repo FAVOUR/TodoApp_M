@@ -83,11 +83,11 @@ class DefaultTaskRepository private constructor(application: Application) {
         }
     }
 
-    suspend fun refresh(){
+    suspend fun refreshTasks(){
         updateTasksFromRemoteDataSource()
     }
 
-    suspend fun  refresh(taskId: String){
+    suspend fun refreshTasks(taskId: String){
         updateTaskFromRemoteDataSource(taskId)
 
     }
