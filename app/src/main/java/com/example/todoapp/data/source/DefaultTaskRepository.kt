@@ -1,6 +1,7 @@
 package com.example.todoapp.data.source
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.local.TaskLocalDataSource
@@ -38,6 +39,11 @@ class DefaultTaskRepository private constructor(application: Application) {
 
         tasksRemoteDataSource = TaskRemoteDataSource
         tasksLocalDataSource = TaskLocalDataSource(database.taskDoa())
+    }
+
+
+    fun observeTasks(): LiveData<Result<List<Task>>> {
+        return tasksLocalDataSource.observeTasks()
     }
 
 

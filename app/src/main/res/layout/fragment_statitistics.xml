@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".statistics.StatitisticsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+   <data>
+
+       <variable
+           name="viewmodel"
+           type="com.example.todoapp.statistics.viewmodel.StatisticsViewModel" />
+
+   </data>
+    <com.example.todoapp.ScrollChildSwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        app:refreshing="@{viewmodel.LDataLoading}"
+        app:onRefreshListener="@{viewmodel::refresh}"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
+    </com.example.todoapp.ScrollChildSwipeRefreshLayout>
 
-</FrameLayout>
+</layout>
