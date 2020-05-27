@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.todoapp.R
-import com.example.todoapp.add_task.viewmodel.TaskViewModel
+import com.example.todoapp.add_task.viewmodel.AddTaskViewModel
 
-class TaskFragment : Fragment() {
+class AddTaskFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TaskFragment()
+        fun newInstance() = AddTaskFragment()
     }
 
-    private lateinit var viewModel: TaskViewModel
+    private lateinit var viewModel: AddTaskViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +27,7 @@ class TaskFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(AddTaskViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
