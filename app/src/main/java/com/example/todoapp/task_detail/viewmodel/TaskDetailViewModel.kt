@@ -1,4 +1,4 @@
-package com.example.todoapp.edit_task.viewmodel
+package com.example.todoapp.task_detail.viewmodel
 
 import android.app.Application
 import androidx.annotation.StringRes

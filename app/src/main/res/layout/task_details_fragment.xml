@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.todoapp.edit_task.viewmodel.TaskDetailViewModel" />
+            type="com.example.todoapp.task_detail.viewmodel.TaskDetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

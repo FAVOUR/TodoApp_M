@@ -1,17 +1,14 @@
-package com.example.todoapp.edit_task.fragment
+package com.example.todoapp.task_detail.fragment
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.todoapp.DELETE_RESULT_OK
-import com.example.todoapp.EventObserver
 import com.example.todoapp.R
 
 import com.example.todoapp.databinding.TaskDetailsFragmentBinding
-import com.example.todoapp.edit_task.viewmodel.TaskDetailViewModel
+import com.example.todoapp.task_detail.viewmodel.TaskDetailViewModel
 import com.example.todoapp.util.setupRefreshLayout
 import com.example.todoapp.util.setupSnackbar
 import com.google.android.material.snackbar.Snackbar
