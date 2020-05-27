@@ -16,7 +16,8 @@ import com.example.todoapp.statistics.viewmodel.StatisticsViewModel
 class StatitisticsFragment : Fragment() {
 
 //    lateinit var viewmodelBinding : FragmentStatitisticsBinding
-//
+
+    
 //    private val viewModel by viewModels <StatisticsViewModel>()
 //
 //    override fun onCreateView(

@@ -96,7 +96,7 @@
 
                 </RelativeLayout>
             </LinearLayout>
-        </com.example.todoapp.ScrollChildSwipeRefreshLayout>>
+        </com.example.todoapp.ScrollChildSwipeRefreshLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/edit_task_fab"
