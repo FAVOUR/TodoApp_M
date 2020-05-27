@@ -59,5 +59,4 @@ class AddTaskFragment : Fragment() {
             findNavController().navigate(action)
         })
     }
-
 }
