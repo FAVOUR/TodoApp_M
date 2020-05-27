@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.R
-
 import com.example.todoapp.databinding.TaskDetailsFragmentBinding
 import com.example.todoapp.task_detail.viewmodel.TaskDetailViewModel
 import com.example.todoapp.util.setupRefreshLayout
@@ -35,6 +34,7 @@ class TaskDetailFragment : Fragment() {
 //                .actionTaskDetailFragmentToTasksFragment(DELETE_RESULT_OK)
 //            findNavController().navigate(action)
 //        })
+
 //        viewModel.editTaskEvent.observe(this, EventObserver {
 //            val action = TaskDetailFragmentDirections.actionTaskDetailFragmentToAddEditTaskFragment(
 //                    args.taskId,
