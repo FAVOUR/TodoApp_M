@@ -30,7 +30,7 @@ class TaskViewModel (application :Application):AndroidViewModel(application) {
 
     }
 
-    val items: LiveData<List<Task>> = _items
+    var items: LiveData<List<Task>> = _items
 
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading

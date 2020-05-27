@@ -24,17 +24,18 @@ class TaskFragment : Fragment() {
 //
 //    private lateinit var listAdapter: TasksAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-//        viewDataBinding = TasksFragBinding.inflate(inflater, container, false).apply {
-//            viewmodel = viewModel
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        viewDataBinding = FragmentT.inflate(inflater, container, false).apply {
+//          viewmodel = viewModel
 //        }
+//
 //        setHasOptionsMenu(true)
 //        return viewDataBinding.root
-       return null
-    }
+//       return null
+//    }
 
 //    override fun onOptionsItemSelected(item: MenuItem) =
 //        when (item.itemId) {
