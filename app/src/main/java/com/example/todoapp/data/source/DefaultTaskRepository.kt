@@ -59,6 +59,13 @@ class DefaultTaskRepository private constructor(application: Application) {
 
     }
 
+    suspend fun getTask(taskId: String,  forceUpdate: Boolean = false): Result<Task> {
+        if (forceUpdate) {
+            updateTaskFromRemoteDataSource(taskId)
+        }
+        return tasksLocalDataSource.getTask(taskId)
+    }
+
 
     suspend fun updateTasksFromRemoteDataSource(){
           val remoteDataSource = tasksRemoteDataSource.getTasks()
