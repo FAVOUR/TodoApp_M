@@ -92,6 +92,10 @@ class DefaultTaskRepository private constructor(application: Application) {
 
     }
 
+    fun observeTask(taskId: String): LiveData<Result<Task>> {
+        return tasksLocalDataSource.observeTask(taskId)
+    }
+
     suspend fun saveTask(task:Task){
         coroutineScope {
             launch { tasksRemoteDataSource.saveTask(task) }

@@ -18,8 +18,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    dataBinding{
-        enabled=true
+    dataBinding {
+        enabled = true
     }
 
     buildTypes {
@@ -46,6 +46,8 @@ dependencies {
 
     // Architecture Components
     implementation "androidx.room:room-runtime:$roomVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
