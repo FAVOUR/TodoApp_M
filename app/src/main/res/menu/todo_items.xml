@@ -6,12 +6,12 @@
         <item
             android:id="@+id/tasks_fragment_dest"
             android:title="Task"
-            android:icon="@drawable/abc_vector_test"
+            android:icon="@drawable/ic_list"
             />
 
         <item android:id="@+id/statistics_fragment_dest"
                android:title="Statistics"
-               android:icon="@drawable/ic_launcher_background"/>
+               android:icon="@drawable/ic_statistics"/>
 </group>
 
 </menu>
