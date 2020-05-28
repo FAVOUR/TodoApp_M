@@ -15,27 +15,27 @@ import com.example.todoapp.statistics.viewmodel.StatisticsViewModel
  */
 class StatitisticsFragment : Fragment() {
 
-//    lateinit var viewmodelBinding : FragmentStatitisticsBinding
+    lateinit var viewmodelBinding : FragmentStatitisticsBinding
 
     
-//    private val viewModel by viewModels <StatisticsViewModel>()
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        viewmodelBinding= FragmentStatitisticsBinding.inflate(inflater)
-//
-//        return viewmodelBinding.root
-//    }
-//
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewmodelBinding.viewmodel =viewModel
-//        viewmodelBinding.lifecycleOwner = this.viewLifecycleOwner
-//    }
-//
+    private val viewModel by viewModels <StatisticsViewModel>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        viewmodelBinding= FragmentStatitisticsBinding.inflate(inflater)
+
+        return viewmodelBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewmodelBinding.viewmodel =viewModel
+        viewmodelBinding.lifecycleOwner = this.viewLifecycleOwner
+    }
+
 
 
 }
