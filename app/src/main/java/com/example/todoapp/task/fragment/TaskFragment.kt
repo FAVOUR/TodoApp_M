@@ -7,8 +7,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.todoapp.EventObserver
 import com.example.todoapp.R
+import com.example.todoapp.databinding.FragmentTaskBinding
+import com.example.todoapp.task.TaskAdapter
+import com.example.todoapp.task.util.TasksFilterType
 import com.example.todoapp.task.viewmodel.TaskViewModel
+import com.example.todoapp.util.setupRefreshLayout
+import com.example.todoapp.util.setupSnackbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
@@ -20,15 +26,15 @@ class TaskFragment : Fragment() {
 
     private val args: TaskFragmentArgs by navArgs()
 
-    private lateinit var viewDataBinding: TasksFragBinding
+    private lateinit var viewDataBinding: FragmentTaskBinding
 
-    private lateinit var listAdapter: TasksAdapter
+    private lateinit var listAdapter: TaskAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = FragmentT.inflate(inflater, container, false).apply {
+        viewDataBinding = FragmentTaskBinding.inflate(inflater, container, false).apply {
           viewmodel = viewModel
         }
 
@@ -114,7 +120,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun navigateToAddNewTask() {
-        val action = TasksFragmentDirections
+        val action = TaskFragmentDirections
             .actionTasksFragmentToAddEditTaskFragment(
                 null,
                 resources.getString(R.string.add_task)
@@ -123,14 +129,14 @@ class TaskFragment : Fragment() {
     }
 
     private fun openTaskDetails(taskId: String) {
-        val action = TasksFragmentDirections.actionTasksFragmentToTaskDetailFragment(taskId)
+        val action = TaskFragmentDirections.actionTasksFragmentToTaskDetailFragment(taskId)
         findNavController().navigate(action)
     }
 
     private fun setupListAdapter() {
         val viewModel = viewDataBinding.viewmodel
         if (viewModel != null) {
-            listAdapter = TasksAdapter(viewModel)
+            listAdapter = TaskAdapter(viewModel)
             viewDataBinding.tasksList.adapter = listAdapter
         } else {
             Timber.w("ViewModel not initialized when attempting to set up adapter.")
