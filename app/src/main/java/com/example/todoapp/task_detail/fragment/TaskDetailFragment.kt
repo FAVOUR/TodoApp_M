@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.todoapp.DELETE_RESULT_OK
+import com.example.todoapp.EventObserver
 import com.example.todoapp.R
 import com.example.todoapp.databinding.TaskDetailsFragmentBinding
 import com.example.todoapp.task_detail.viewmodel.TaskDetailViewModel
@@ -29,19 +32,19 @@ class TaskDetailFragment : Fragment() {
     }
 
     private fun setupNavigation() {
-//        viewModel.deleteTaskEvent.observe(this, EventObserver {
-//            val action = TaskDetailFragmentDirections
-//                .actionTaskDetailFragmentToTasksFragment(DELETE_RESULT_OK)
-//            findNavController().navigate(action)
-//        })
+        viewModel.deleteTaskEvent.observe(this, EventObserver {
+            val action = TaskDetailFragmentDirections
+                .actionTaskDetailFragmentToTasksFragment(DELETE_RESULT_OK)
+            findNavController().navigate(action)
+        })
 
-//        viewModel.editTaskEvent.observe(this, EventObserver {
-//            val action = TaskDetailFragmentDirections.actionTaskDetailFragmentToAddEditTaskFragment(
-//                    args.taskId,
-//                    resources.getString(R.string.edit_task)
-//                )
-//            findNavController().navigate(action)
-//        })
+        viewModel.editTaskEvent.observe(this, EventObserver {
+            val action = TaskDetailFragmentDirections.actionTaskDetailFragmentToAddEditTaskFragment(
+                    args.taskId,
+                    resources.getString(R.string.edit_task)
+                )
+            findNavController().navigate(action)
+        })
     }
 
     private fun setupFab() {
