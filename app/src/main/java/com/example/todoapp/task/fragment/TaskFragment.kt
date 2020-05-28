@@ -40,7 +40,6 @@ class TaskFragment : Fragment() {
 
         setHasOptionsMenu(true)
         return viewDataBinding.root
-       return null
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =

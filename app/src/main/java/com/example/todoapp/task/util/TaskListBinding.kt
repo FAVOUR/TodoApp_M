@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.data.Task
 import com.example.todoapp.task.TaskAdapter
 
-class TaskListBinding {
 
-    @BindingAdapter("items")
-    fun bindItems(view: RecyclerView, itemList :List<Task>){
+    @BindingAdapter("items") //app:items it could be this way if you wish
+    fun bindItems(view: RecyclerView, itemList :List<Task>?){
         itemList?.let {
             (view.adapter as TaskAdapter).submitList(itemList)
         }
@@ -23,5 +22,5 @@ class TaskListBinding {
         } else {
             textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
-    }
+
 }
