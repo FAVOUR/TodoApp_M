@@ -30,8 +30,6 @@ class TaskViewModelTest{
         var taskVM= TaskViewModel(app)
 
 
-        //
-
         var observer = Observer<Event<Unit>>{}
 
         try {
