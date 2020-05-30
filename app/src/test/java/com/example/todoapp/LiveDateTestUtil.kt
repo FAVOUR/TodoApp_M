@@ -36,6 +36,8 @@ fun <T> LiveData<T>.addObserver(
     }
     catch (e:Exception){
 
+        this.removeObserver(observer)
+
     }finally {
 
         this.removeObserver(observer)

@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.todoapp.Event
+import com.example.todoapp.addObserver
 import org.hamcrest.Matchers.not
 import org.hamcrest.Matchers.nullValue
 import org.jetbrains.annotations.NotNull
@@ -33,14 +34,14 @@ class TaskViewModelTest{
         var observer = Observer<Event<Unit>>{}
 
         try {
-            taskVM.newTaskEvent.observeForever(observer)
+//            taskVM.newTaskEvent.observeForever(observer)
 
 
             //When
             taskVM.addNewTask()
 
 
-            var value = taskVM.newTaskEvent.value
+            var value = taskVM.newTaskEvent.addObserver()
 
             assertThat(value?.getContentIfNotHandled(), (not(nullValue())))
 
