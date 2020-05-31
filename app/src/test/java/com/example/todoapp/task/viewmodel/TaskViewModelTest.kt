@@ -45,9 +45,6 @@ class TaskViewModelTest{
         var observer = Observer<Event<Unit>>{}
 
         try {
-//            taskVM.newTaskEvent.observeForever(observer)
-
-
             //When
             taskViewModel.addNewTask()
 
@@ -65,20 +62,15 @@ class TaskViewModelTest{
     @Test
     fun setFilterAllTasks_tasksAddViewVisible() {
 
-//        var app= ApplicationProvider.getApplicationContext<Application>()
-//        // Given a fresh ViewModel
-//
-//        var taskViewModel = TaskViewModel(app)
         // When the filter type is ALL_TASKS
-
         taskViewModel.setFiltering(TasksFilterType.ALL_TASKS)
+
 
         var value =taskViewModel.tasksAddViewVisible.addObserver()
 
+
         // Then the "Add task" action is visible
-
         assertThat(value, `is` (true) )
-
 
     }
 }
