@@ -2,8 +2,15 @@ package com.example.todoapp.data.source
 
 import com.example.todoapp.FakeDataSource
 import com.example.todoapp.data.Task
+import com.example.todoapp.data.source.remote.TaskRemoteDataSource
+import com.example.todoapp.util.Result
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.runBlockingTest
+import org.hamcrest.core.IsEqual
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
+
 
 class DefaultTaskRepositoryTest(){
 
@@ -15,7 +22,26 @@ class DefaultTaskRepositoryTest(){
     private val localTasks = listOf(task3).sortedBy { it.id }
     private val newTasks = listOf(task3).sortedBy { it.id }
 
+    lateinit var tasksRemoteDataSource: TasksDataSource
+    lateinit var tasksLocalDataSource: TasksDataSource
+    lateinit var defaultTaskRepository: DefaultTaskRepository
 
-//     @Before
-//     fun start
+     @Before
+     fun  createRepository(){
+         tasksRemoteDataSource = FakeDataSource(remoteTasks.toMutableList())
+         tasksLocalDataSource = FakeDataSource(localTasks.toMutableList())
+         defaultTaskRepository= DefaultTaskRepository(tasksRemoteDataSource,tasksLocalDataSource,Dispatchers.Unconfined)
+     }
+
+    @Test
+    fun getTask_requestTaskFromRemoteDataSource(){
+        runBlockingTest {
+       val  task = defaultTaskRepository.getTask(isForceUpdate = true) as Result.Success
+
+              assertThat(task.data, IsEqual(remoteTasks))
+
+        }
+
+
+    }
 }
