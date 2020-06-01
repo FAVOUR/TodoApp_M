@@ -3,8 +3,9 @@ package com.example.todoapp.data.source
 import com.example.todoapp.FakeDataSource
 import com.example.todoapp.data.Task
 import org.junit.Assert.*
+import org.junit.Before
 
-class DefaultTaskRepositoryTest(var taskRemoteDataSource:FakeDataSource, var taskLocalDataSource: FakeDataSource){
+class DefaultTaskRepositoryTest(){
 
     var task1 = Task("Title_1"  ,"Descreption 1 ")
     var task2= Task("Title_2"  ,"Descreption 2 ")
@@ -13,4 +14,8 @@ class DefaultTaskRepositoryTest(var taskRemoteDataSource:FakeDataSource, var tas
     private val remoteTasks = listOf(task1, task2).sortedBy { it.id }
     private val localTasks = listOf(task3).sortedBy { it.id }
     private val newTasks = listOf(task3).sortedBy { it.id }
+
+
+//     @Before
+//     fun start
 }

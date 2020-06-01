@@ -9,13 +9,17 @@ import com.example.todoapp.data.source.local.db.ToDoDataBase
 import com.example.todoapp.data.source.remote.TaskRemoteDataSource
 import com.example.todoapp.util.Result
 import kotlinx.coroutines.*
+import javax.sql.DataSource
 
-class DefaultTaskRepository private constructor(application: Application) {
+//class DefaultTaskRepository private constructor(application: Application) {
+class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource,
+                                                 private val tasksLocalDataSource: TasksDataSource,
+                                                 private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) {
 
 //    private val tasksRemoteDataSource: TasksDataSource
-    private val tasksRemoteDataSource: TaskRemoteDataSource
-    private val tasksLocalDataSource: TaskLocalDataSource
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+//    private val tasksRemoteDataSource:tasksRemoteDataSource
+//    private val tasksLocalDataSource: TasksDataSource
+//    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
 
         companion object{
@@ -24,7 +28,10 @@ class DefaultTaskRepository private constructor(application: Application) {
 
             fun getRepository(app:Application) :DefaultTaskRepository{
                 return  INSTANCE ?: synchronized(this){
-                    DefaultTaskRepository(app).also {
+                    val database = Room.databaseBuilder(app.applicationContext,
+                        ToDoDataBase::class.java, "Tasks.db")
+                        .build()
+                    DefaultTaskRepository(TaskRemoteDataSource,TaskLocalDataSource(database.taskDoa()),Dispatchers.IO).also {
                         INSTANCE=it
                     }
                 }
@@ -33,13 +40,11 @@ class DefaultTaskRepository private constructor(application: Application) {
         }
 
     init {
-        val database = Room.databaseBuilder(application.applicationContext,
-            ToDoDataBase::class.java, "Tasks.db")
-            .build()
 
-        tasksRemoteDataSource = TaskRemoteDataSource
-        tasksLocalDataSource = TaskLocalDataSource(database.taskDoa())
-    }
+//
+//        tasksRemoteDataSource = TaskRemoteDataSource
+//        tasksLocalDataSource = TaskLocalDataSource(database.taskDoa())
+}
 
 
     fun observeTasks(): LiveData<Result<List<Task>>> {
