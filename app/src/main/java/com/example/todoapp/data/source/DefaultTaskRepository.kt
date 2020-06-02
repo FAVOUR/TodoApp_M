@@ -13,15 +13,8 @@ import javax.sql.DataSource
 
 //class DefaultTaskRepository private constructor(application: Application) {
 class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource,
-                                                 private val tasksLocalDataSource: TasksDataSource,
-                                                 private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) :
-    TaskRepository {
-
-//    private val tasksRemoteDataSource: TasksDataSource
-//    private val tasksRemoteDataSource:tasksRemoteDataSource
-//    private val tasksLocalDataSource: TasksDataSource
-//    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-
+                               private val tasksLocalDataSource: TasksDataSource,
+                               private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) : TaskRepository {
 
         companion object{
             @Volatile
