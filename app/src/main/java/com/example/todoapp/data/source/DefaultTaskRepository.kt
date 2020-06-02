@@ -73,7 +73,7 @@ class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource
     }
 
 
-    suspend fun updateTasksFromRemoteDataSource(){
+    private suspend fun updateTasksFromRemoteDataSource(){
           val remoteDataSource = tasksRemoteDataSource.getTasks()
 
           if (remoteDataSource is Result.Success){
