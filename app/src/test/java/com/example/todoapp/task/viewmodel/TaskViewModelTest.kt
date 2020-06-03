@@ -6,7 +6,6 @@ import com.example.todoapp.Event
 import com.example.todoapp.addObserver
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.FakeTaskRepository
-import com.example.todoapp.data.source.TaskRepository
 import com.example.todoapp.task.util.TasksFilterType
 import org.hamcrest.Matchers.*
 import org.junit.Assert.*
