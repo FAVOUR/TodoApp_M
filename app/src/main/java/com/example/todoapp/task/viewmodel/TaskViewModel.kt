@@ -8,13 +8,13 @@ import com.example.todoapp.*
 import com.example.todoapp.R
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.DefaultTaskRepository
+import com.example.todoapp.data.source.TaskRepository
 import com.example.todoapp.task.util.TasksFilterType
 import com.example.todoapp.util.Result
 import kotlinx.coroutines.launch
 
-class TaskViewModel (application :Application):AndroidViewModel(application) {
+class TaskViewModel (val tasksRepository :TaskRepository):ViewModel(){
 
-    private val tasksRepository = DefaultTaskRepository.getRepository(application)
 
     private val _forceUpdate = MutableLiveData<Boolean>(false)
 
