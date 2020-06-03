@@ -1,6 +1,5 @@
 package com.example.todoapp.data.source
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.todoapp.data.Task

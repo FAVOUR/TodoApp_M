@@ -33,13 +33,6 @@ class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource
 
         }
 
-    init {
-
-//
-//        tasksRemoteDataSource = TaskRemoteDataSource
-//        tasksLocalDataSource = TaskLocalDataSource(database.taskDoa())
-}
-
 
     override fun observeTasks(): LiveData<Result<List<Task>>> {
         return tasksLocalDataSource.observeTasks()

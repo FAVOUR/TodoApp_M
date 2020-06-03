@@ -9,6 +9,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.todoapp.Event
 import com.example.todoapp.addObserver
+import com.example.todoapp.data.source.FakeTaskRepositoryTest
 import com.example.todoapp.task.util.TasksFilterType
 import org.hamcrest.Matchers.*
 import org.jetbrains.annotations.NotNull
@@ -19,7 +20,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-@RunWith(AndroidJUnit4::class)
 class TaskViewModelTest{
 
     lateinit var  taskViewModel: TaskViewModel
@@ -31,15 +31,13 @@ class TaskViewModelTest{
     fun setupViewModel(){
 
         //Given
-        var app = ApplicationProvider.getApplicationContext<Application>()
+//        var app = ApplicationProvider.getApplicationContext<Application>()
 
-        taskViewModel= TaskViewModel(app)
+        taskViewModel= TaskViewModel(FakeTaskRepositoryTest())
 
     }
     @Test
     fun addTask_setsNewEventTask(){
-
-
 
 
         var observer = Observer<Event<Unit>>{}
