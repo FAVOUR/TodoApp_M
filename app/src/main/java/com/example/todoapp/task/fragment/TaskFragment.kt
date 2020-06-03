@@ -5,14 +5,17 @@ import android.view.*
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.EventObserver
 import com.example.todoapp.R
+import com.example.todoapp.data.source.DefaultTaskRepository
 import com.example.todoapp.databinding.FragmentTaskBinding
 import com.example.todoapp.task.TaskAdapter
 import com.example.todoapp.task.util.TasksFilterType
 import com.example.todoapp.task.viewmodel.TaskViewModel
+import com.example.todoapp.task.viewmodel.factory.TasksViewModelFactory
 import com.example.todoapp.util.setupRefreshLayout
 import com.example.todoapp.util.setupSnackbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,7 +25,9 @@ import timber.log.Timber
 class TaskFragment : Fragment() {
 
 
-    private val viewModel by viewModels<TaskViewModel>()
+    private val viewModel by viewModels<TaskViewModel>{
+          TasksViewModelFactory(DefaultTaskRepository.getRepository(this.activity!!.application))
+    }
 
     private val args: TaskFragmentArgs by navArgs()
 
