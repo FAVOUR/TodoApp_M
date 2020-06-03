@@ -6,7 +6,7 @@ import com.example.todoapp.data.Task
 import com.example.todoapp.util.Result
 import kotlinx.coroutines.runBlocking
 
-class FakeTaskRepositoryTest :TaskRepository{
+class FakeTaskRepository :TaskRepository{
 
     var taskDataSource :LinkedHashMap<String,Task> = LinkedHashMap()
     var  observableDataSource : MutableLiveData<Result<List<Task>>> = MutableLiveData()
@@ -70,7 +70,7 @@ class FakeTaskRepositoryTest :TaskRepository{
         TODO("Not yet implemented")
     }
 
-    private fun addTask(vararg tasks:Task){
+     fun addTask(vararg tasks:Task){
             for(task in tasks ) {
                 taskDataSource[task.id] = task
             }

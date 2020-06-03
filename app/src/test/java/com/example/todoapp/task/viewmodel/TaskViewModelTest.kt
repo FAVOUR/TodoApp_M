@@ -1,24 +1,18 @@
 package com.example.todoapp.task.viewmodel
 
-import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.databinding.Observable
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.todoapp.Event
 import com.example.todoapp.addObserver
-import com.example.todoapp.data.source.FakeTaskRepositoryTest
+import com.example.todoapp.data.Task
+import com.example.todoapp.data.source.FakeTaskRepository
+import com.example.todoapp.data.source.TaskRepository
 import com.example.todoapp.task.util.TasksFilterType
 import org.hamcrest.Matchers.*
-import org.jetbrains.annotations.NotNull
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 
 class TaskViewModelTest{
 
@@ -33,7 +27,16 @@ class TaskViewModelTest{
         //Given
 //        var app = ApplicationProvider.getApplicationContext<Application>()
 
-        taskViewModel= TaskViewModel(FakeTaskRepositoryTest())
+
+        // We initialise the tasks to 3, with one active and two completed
+       var tasksRepository : FakeTaskRepository   = FakeTaskRepository()
+        val task1 = Task("Title1", "Description1")
+        val task2 = Task("Title2", "Description2", true)
+        val task3 = Task("Title3", "Description3", true)
+        tasksRepository.addTask(task1, task2, task3)
+
+
+        taskViewModel= TaskViewModel(tasksRepository)
 
     }
     @Test
