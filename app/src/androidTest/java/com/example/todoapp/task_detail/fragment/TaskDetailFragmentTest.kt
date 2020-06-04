@@ -23,6 +23,7 @@ class TaskDetailFragmentTest{
           val bundle =TaskDetailFragmentArgs(task.id).toBundle()
 
           launchFragmentInContainer<TaskDetailFragment>(bundle, R.style.AppTheme)
+
         //Makes the display delay for 2 seconds
         Thread.sleep(2000)
     }
