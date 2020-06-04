@@ -13,16 +13,21 @@ import com.example.todoapp.data.source.remote.TaskRemoteDataSource
 object ServiceLocator {
 
     var dataBase :ToDoDataBase? =null
+    var taskRepository :TaskRepository? =null
 
     //Create a TaskRepository and if created return the already instantiated instance
 //     fun provideRepository():TasksDataSource{
 //
 //    }
 //
-//    //Create the TaskDataRepository
-//     fun taskDataRepository(context: Context):TaskRepository{
-//       val  defaultRepository = DefaultTaskRepository(TaskRemoteDataSource,createLocalDataSource(context))
-//    }
+    //Create the TaskDataRepository
+     fun taskDataRepository(context: Context):TaskRepository{
+       val  newRepo = DefaultTaskRepository(TaskRemoteDataSource,createLocalDataSource(context))
+
+        taskRepository=newRepo
+
+        return  newRepo
+    }
 
     //Create a TaskDataSource
     fun createLocalDataSource(context: Context):TasksDataSource{
