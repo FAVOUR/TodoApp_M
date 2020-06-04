@@ -6,14 +6,14 @@ import com.example.todoapp.Event
 import com.example.todoapp.R
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.DefaultTaskRepository
+import com.example.todoapp.data.source.TaskRepository
 import com.example.todoapp.util.Result
 import kotlinx.coroutines.launch
 
-class AddTaskViewModel (application: Application) : AndroidViewModel(application) {
+class AddTaskViewModel (val tasksRepository: TaskRepository) : ViewModel() {
 
     // Note, for testing and architecture purposes, it's bad practice to construct the repository
     // here. We'll show you how to fix this during the codelab
-    private val tasksRepository = DefaultTaskRepository.getRepository(application)
 
     // Two-way databinding, exposing MutableLiveData
     val title = MutableLiveData<String>()

@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.todoapp.DELETE_RESULT_OK
-import com.example.todoapp.EventObserver
-import com.example.todoapp.R
+import com.example.todoapp.*
 import com.example.todoapp.databinding.TaskDetailsFragmentBinding
 import com.example.todoapp.task_detail.viewmodel.TaskDetailViewModel
 import com.example.todoapp.util.setupRefreshLayout
@@ -21,7 +19,10 @@ class TaskDetailFragment : Fragment() {
 
     private val args: TaskDetailFragmentArgs by navArgs()
 
-    private val viewModel by viewModels<TaskDetailViewModel>()
+    private val viewModel by viewModels<TaskDetailViewModel>{
+        ViewModelFactory(ServiceLocator.provideRepository(this.requireContext()))
+
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

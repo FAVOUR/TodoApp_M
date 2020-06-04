@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.todoapp.R
+import com.example.todoapp.ServiceLocator
 import com.example.todoapp.databinding.FragmentStatitisticsBinding
 import com.example.todoapp.statistics.viewmodel.StatisticsViewModel
+import com.example.todoapp.ViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -18,7 +19,14 @@ class StatitisticsFragment : Fragment() {
     lateinit var viewmodelBinding : FragmentStatitisticsBinding
 
     
-    private val viewModel by viewModels <StatisticsViewModel>()
+    private val viewModel by viewModels <StatisticsViewModel>{
+        ViewModelFactory(
+            ServiceLocator.provideRepository(
+                this.requireContext()
+            )
+        )
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

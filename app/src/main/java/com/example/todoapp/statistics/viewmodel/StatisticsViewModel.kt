@@ -3,13 +3,14 @@ package com.example.todoapp.statistics.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.todoapp.data.source.DefaultTaskRepository
+import com.example.todoapp.data.source.TaskRepository
 import com.example.todoapp.statistics.util.getActiveAndCompletedStats
 import com.example.todoapp.util.Result
 import kotlinx.coroutines.launch
 
-class StatisticsViewModel(application: Application) :AndroidViewModel(application) {
+class StatisticsViewModel(val defaultTaskRepository:TaskRepository) :ViewModel(){
 
-    private val defaultTaskRepository = DefaultTaskRepository.getRepository(application)
+//    private val defaultTaskRepository = DefaultTaskRepository.getRepository(application)
 
     private val task = defaultTaskRepository.observeTasks()
 

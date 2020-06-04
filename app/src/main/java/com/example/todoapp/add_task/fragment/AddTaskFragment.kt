@@ -12,8 +12,10 @@ import com.example.todoapp.ADD_EDIT_RESULT_OK
 import com.example.todoapp.EventObserver
 
 import com.example.todoapp.R
+import com.example.todoapp.ServiceLocator
 import com.example.todoapp.add_task.viewmodel.AddTaskViewModel
 import com.example.todoapp.databinding.AddtaskFragmentBinding
+import com.example.todoapp.ViewModelFactory
 import com.example.todoapp.util.setupRefreshLayout
 import com.example.todoapp.util.setupSnackbar
 import com.google.android.material.snackbar.Snackbar
@@ -24,7 +26,13 @@ class AddTaskFragment : Fragment() {
 
     private val args: AddTaskFragmentArgs by navArgs()
 
-    private val viewModel by viewModels<AddTaskViewModel>()
+    private val viewModel by viewModels<AddTaskViewModel>{
+        ViewModelFactory(
+            ServiceLocator.provideRepository(
+                this.requireContext()
+            )
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
