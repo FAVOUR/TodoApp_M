@@ -16,6 +16,7 @@ class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource
                                private val tasksLocalDataSource: TasksDataSource,
                                private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) : TaskRepository {
 
+/*
         companion object{
             @Volatile
             private var INSTANCE :DefaultTaskRepository? =null
@@ -32,6 +33,7 @@ class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource
             }
 
         }
+*/
 
 
     override fun observeTasks(): LiveData<Result<List<Task>>> {

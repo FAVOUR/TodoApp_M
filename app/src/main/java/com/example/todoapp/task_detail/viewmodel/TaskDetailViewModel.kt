@@ -9,13 +9,14 @@ import com.example.todoapp.data.source.DefaultTaskRepository
 import com.example.todoapp.util.Result
 import kotlinx.coroutines.launch
 import com.example.todoapp.R
+import com.example.todoapp.data.source.TaskRepository
 
 
-class TaskDetailViewModel (application: Application) : AndroidViewModel(application) {
+class TaskDetailViewModel (var tasksRepository: TaskRepository) : ViewModel() {
 
     // Note, for testing and architecture purposes, it's bad practice to construct the repository
     // here. We'll show you how to fix this during the codelab
-    private val tasksRepository = DefaultTaskRepository.getRepository(application)
+//    private val tasksRepository = DefaultTaskRepository.getRepository(application)
 
     private val _taskId = MutableLiveData<String>()
 

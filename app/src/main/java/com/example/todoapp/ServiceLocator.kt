@@ -25,7 +25,7 @@ object ServiceLocator {
     }
 //
     //Create the TaskDataRepository
-     fun taskDataRepository(context: Context):TaskRepository{
+     private fun taskDataRepository(context: Context):TaskRepository{
        val  newRepo = DefaultTaskRepository(TaskRemoteDataSource,createLocalDataSource(context))
 
         taskRepository=newRepo
@@ -34,14 +34,14 @@ object ServiceLocator {
     }
 
     //Create a TaskDataSource
-    fun createLocalDataSource(context: Context):TasksDataSource{
+    private fun createLocalDataSource(context: Context):TasksDataSource{
         val dataBase = dataBase ?: createDatabase(context)
 
         return  TaskLocalDataSource(dataBase.taskDoa())
     }
 
     //Create the repository
-    fun createDatabase(context: Context):ToDoDataBase{
+    private fun createDatabase(context: Context):ToDoDataBase{
 
         var dbCreated = Room.databaseBuilder(context,ToDoDataBase::class.java,"Tasks.db")
                                         .fallbackToDestructiveMigration()
