@@ -1,6 +1,9 @@
 package com.example.todoapp.task_detail.fragment
 
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import androidx.test.runner.AndroidJUnitRunner
@@ -49,6 +52,15 @@ class TaskDetailFragmentTest{
 
 
         launchFragmentInContainer<TaskDetailFragment>(bundle, R.style.AppTheme)
+
+         onView(withId(R.id.task_detail_title_text)).check(matches (isDisplayed()))
+         onView(withId(R.id.task_detail_title_text)).check(matches (withText("Active Task")))
+
+         onView(withId(R.id.task_detail_description_text)).check(matches (isDisplayed()))
+         onView(withId(R.id.task_detail_description_text)).check(matches (withText("Androidx Rocks")))
+
+         onView(withId(R.id.task_detail_complete_checkbox)).check(matches (isDisplayed()))
+         onView(withId(R.id.task_detail_complete_checkbox)).check(matches (isNotChecked()))
 
         //Makes the display delay for 2 seconds
         Thread.sleep(2000)
