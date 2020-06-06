@@ -1,6 +1,7 @@
 package com.example.todoapp.task_detail.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,8 +21,7 @@ class TaskDetailFragment : Fragment() {
     private val args: TaskDetailFragmentArgs by navArgs()
 
     private val viewModel by viewModels<TaskDetailViewModel>{
-        ViewModelFactory(ServiceLocator.provideRepository(this.requireContext()))
-
+        ViewModelFactory((requireContext().applicationContext as TodoApplication).taskRepository!!)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -41,9 +41,7 @@ class TaskDetailFragment : Fragment() {
 
         viewModel.editTaskEvent.observe(this, EventObserver {
             val action = TaskDetailFragmentDirections.actionTaskDetailFragmentToAddEditTaskFragment(
-                    args.taskId,
-                    resources.getString(R.string.edit_task)
-                )
+                args.taskId, resources.getString(R.string.edit_task))
             findNavController().navigate(action)
         })
     }
@@ -65,6 +63,7 @@ class TaskDetailFragment : Fragment() {
         }
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
+        Log.i("dummy args.taskId TaskDetailsFragment",args.taskId)
         viewModel.start(args.taskId)
 
         setHasOptionsMenu(true)

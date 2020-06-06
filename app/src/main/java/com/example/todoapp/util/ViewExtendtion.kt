@@ -1,5 +1,6 @@
 package com.example.todoapp.util
 
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import com.example.todoapp.Event
 import com.example.todoapp.R
 import com.example.todoapp.ScrollChildSwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 
 //class ViewExtendtion {
 
@@ -34,6 +36,9 @@ import com.google.android.material.snackbar.Snackbar
 
         snackbarEvent.observe(lifecycleOwner, Observer { event ->
             event.getContentIfNotHandled()?.let {
+                Log.i("dummy  setupSnackbar(....) ViewExtendtion", Gson().toJson( it))
+                Log.i("dummy  setupSnackbar(....)  showSnackbar(context.getString(it), timeLength) ViewExtendtion",context.getString(it))
+
                 showSnackbar(context.getString(it), timeLength)
             }
         })

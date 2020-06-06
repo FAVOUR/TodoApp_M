@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.todoapp.data.Task
 import com.example.todoapp.util.Result
+import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 
 class FakeTaskRepository :TaskRepository{
 
@@ -17,8 +19,10 @@ class FakeTaskRepository :TaskRepository{
     }
 
     override suspend fun getTask(isForceUpdate: Boolean): Result<List<Task>> {
-             val tasks=  taskDataSource.values.toList()
-//            Log.i("tasks", Gson())
+        Timber.d("Dummy tasks", "Gson().toJson(tasks)")
+
+        val tasks=  taskDataSource.values.toList()
+            Timber.d("Dummy tasks", Gson().toJson(tasks))
            return  Result.Success(tasks)
     }
 
@@ -71,7 +75,9 @@ class FakeTaskRepository :TaskRepository{
     }
 
      fun addTask(vararg tasks:Task){
-            for(task in tasks ) {
+         Timber.d("Dummy tasks", "Added")
+
+         for(task in tasks ) {
                 taskDataSource[task.id] = task
             }
         }

@@ -1,11 +1,13 @@
 package com.example.todoapp.data.source.remote
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.TasksDataSource
 import com.example.todoapp.util.Result
+import com.google.gson.Gson
 import kotlinx.coroutines.delay
 import java.lang.Error
 
@@ -38,6 +40,8 @@ object  TaskRemoteDataSource : TasksDataSource {
     override suspend fun getTasks(): Result<List<Task>> {
         // Simulate network by delaying the execution.
         val tasks = TASKS_SERVICE_DATA.values.toList()
+        Log.i("dummy  getTask(taskId: String, forceUpdate: Boolean) Task remote", Gson().toJson(tasks))
+
         delay(SERVICE_LATENCY_IN_MILLIS)
         return Result.Success(tasks)
     }

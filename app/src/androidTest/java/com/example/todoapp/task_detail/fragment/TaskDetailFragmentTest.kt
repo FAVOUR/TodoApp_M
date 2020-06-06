@@ -9,6 +9,7 @@ import com.example.todoapp.ServiceLocator
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.FakeAndroidTestRepository
 import com.example.todoapp.data.source.TaskRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Assert.*
@@ -18,6 +19,7 @@ import org.junit.runner.RunWith
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
+@ExperimentalCoroutinesApi
 class TaskDetailFragmentTest{
 
     private lateinit var repository: TaskRepository
@@ -42,6 +44,8 @@ class TaskDetailFragmentTest{
 
         // WHEN - Details fragment launched to display task
           val bundle =TaskDetailFragmentArgs(task.id).toBundle()
+
+
 
 
         launchFragmentInContainer<TaskDetailFragment>(bundle, R.style.AppTheme)

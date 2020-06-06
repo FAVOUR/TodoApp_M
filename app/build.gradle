@@ -38,6 +38,7 @@ android {
 dependencies {
     // App dependencies
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation "androidx.cardview:cardview:$cardVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
@@ -47,6 +48,7 @@ dependencies {
 //    implementation "androidx.legacy:legacy-support-v4:$androidXLegacySupport"
 //    implementation "androidx.room:room-runtime:$roomVersion"
 //    kapt "androidx.room:room-compiler:$roomVersion"
+
 
     // Architecture Components
     implementation "androidx.room:room-runtime:$roomVersion"

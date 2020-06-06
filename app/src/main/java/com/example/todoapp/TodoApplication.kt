@@ -9,7 +9,6 @@ class TodoApplication :Application() {
 
      var taskRepository:TaskRepository?=null
          get() = ServiceLocator.provideRepository(this)
-         @VisibleForTesting set
 
 
 

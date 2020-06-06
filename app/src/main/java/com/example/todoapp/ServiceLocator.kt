@@ -17,6 +17,8 @@ object ServiceLocator {
     var dataBase :ToDoDataBase? =null
     @Volatile
     var taskRepository :TaskRepository? =null
+        @VisibleForTesting set
+
 
     //Create a TaskRepository and if created return the already instantiated instance
 
