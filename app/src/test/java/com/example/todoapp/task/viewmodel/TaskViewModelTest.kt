@@ -4,10 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.todoapp.Event
 import com.example.todoapp.R
-import com.example.todoapp.addObserver
+import com.example.todoapp.`addObserver getOrAwaitValue`
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.FakeTaskRepository
-import com.example.todoapp.data.source.TaskRepository
 import com.example.todoapp.task.util.TasksFilterType
 import org.hamcrest.Matchers.*
 import org.junit.Assert.*
@@ -15,24 +14,24 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class TaskViewModelTest{
+class TaskViewModelTest {
 
-    lateinit var  taskViewModel: TaskViewModel
-    lateinit var   task1:Task
-    lateinit var tasksRepository : FakeTaskRepository
+    lateinit var taskViewModel: TaskViewModel
+    lateinit var task1: Task
+    lateinit var tasksRepository: FakeTaskRepository
 
-        @get:Rule
-    var instantTaskExecutorRule =InstantTaskExecutorRule()
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
-    fun setupViewModel(){
+    fun setupViewModel() {
 
         //Given
 //        var app = ApplicationProvider.getApplicationContext<Application>()
 
 
         // We initialise the tasks to 3, with one active and two completed
-        tasksRepository    = FakeTaskRepository()
+        tasksRepository = FakeTaskRepository()
         task1 = Task("Title1", "Description1")
 //        val task2 = Task("Title2", "Description2", true)
 //        val task3 = Task("Title3", "Description3", true)
@@ -40,25 +39,26 @@ class TaskViewModelTest{
         tasksRepository.addTask(task1)
 
 
-        taskViewModel= TaskViewModel(tasksRepository)
+        taskViewModel = TaskViewModel(tasksRepository)
 
     }
+
     @Test
-    fun addTask_setsNewEventTask(){
+    fun addTask_setsNewEventTask() {
 
 
-        var observer = Observer<Event<Unit>>{}
+        var observer = Observer<Event<Unit>> {}
 
         try {
             //When
             taskViewModel.addNewTask()
 
 
-            var value = taskViewModel.newTaskEvent.addObserver()
+            var value = taskViewModel.newTaskEvent.`addObserver getOrAwaitValue`()
 
             assertThat(value?.getContentIfNotHandled(), (not(nullValue())))
 
-        }finally {
+        } finally {
             taskViewModel.newTaskEvent.removeObserver(observer)
         }
     }
@@ -71,24 +71,23 @@ class TaskViewModelTest{
         taskViewModel.setFiltering(TasksFilterType.ALL_TASKS)
 
 
-        var value =taskViewModel.tasksAddViewVisible.addObserver()
+        var value = taskViewModel.tasksAddViewVisible.`addObserver getOrAwaitValue`()
 
 
         // Then the "Add task" action is visible
-        assertThat(value, `is` (true) )
+        assertThat(value, `is`(true))
 
     }
 
 
-
     @Test
-    fun completeTask_dataAndSnackBarUpdated(){
-        taskViewModel.completeTask(task1,true)
+    fun completeTask_dataAndSnackBarUpdated() {
+        taskViewModel.completeTask(task1, true)
 
-        assertThat(tasksRepository.taskDataSource[task1.id]?.isCompleted!!, `is` (true))
+        assertThat(tasksRepository.taskDataSource[task1.id]?.isCompleted!!, `is`(true))
 
-        val snackbartest :Event<Int> = taskViewModel.snackbarText.addObserver()
+        val snackbartest: Event<Int> = taskViewModel.snackbarText.`addObserver getOrAwaitValue`()
 
-        assertThat(snackbartest.getContentIfNotHandled(),`is` (R.string.task_marked_complete))
+        assertThat(snackbartest.getContentIfNotHandled(), `is`(R.string.task_marked_complete))
     }
 }

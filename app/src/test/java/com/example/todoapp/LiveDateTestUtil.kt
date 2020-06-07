@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 
-fun <T> LiveData<T>.addObserver(
+fun <T> LiveData<T>.`addObserver getOrAwaitValue`(
     timeUnit: TimeUnit=TimeUnit.SECONDS,
     time:Long=2L,
     afterObserver : () -> Unit={}
@@ -19,7 +19,7 @@ fun <T> LiveData<T>.addObserver(
               data =t
              //StartCountDown
              latch.countDown()
-             this@addObserver.removeObserver(this)
+             this@`addObserver getOrAwaitValue`.removeObserver(this)
 
 
          }
