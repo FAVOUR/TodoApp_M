@@ -1,6 +1,8 @@
 package com.example.todoapp.task.fragment
 
+import android.content.Context
 import android.content.res.Resources
+import android.graphics.ColorSpace.match
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
@@ -27,20 +29,23 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
 @ExperimentalCoroutinesApi
 class TaskFragmentTest{
      lateinit var taskRepository :TaskRepository
+     lateinit var context : Context
     @Before
     fun setup(){
         taskRepository = FakeAndroidTestRepository()
 
         ServiceLocator.taskRepository=taskRepository
+
+        context= ApplicationProvider.getApplicationContext()
     }
 
     @After
@@ -77,5 +82,29 @@ class TaskFragmentTest{
          )
 
       }
+@Test
+    fun fragment_clickAddTaskButton_navigateToAddTaskFragment()= runBlockingTest{
+
+//        val task =Task("Welcome","Lets Number",false)
+//        taskRepository.saveTask(task)
+
+
+        val scenerio =  launchFragmentInContainer<TaskFragment>(Bundle(), R.style.AppTheme)
+
+         val controller = mock(NavController::class.java)
+
+        scenerio.onFragment {
+            Navigation.setViewNavController(it.view!!,controller)
+        }
+
+        onView(withId(R.id.add_task_fab)).perform(click())
+
+        verify(controller).navigate(TaskFragmentDirections.actionTasksFragmentToAddEditTaskFragment(null ,context.resources.getString(R.string.add_task)))
+
+
+
+
+
+    }
 
 }
