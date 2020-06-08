@@ -4,10 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.todoapp.Event
 import com.example.todoapp.R
+import com.example.todoapp.TestCouroutinUtil
 import com.example.todoapp.`addObserver getOrAwaitValue`
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.FakeTaskRepository
 import com.example.todoapp.task.util.TasksFilterType
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
@@ -23,8 +25,9 @@ class TaskViewModelTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-//    @get:Rule
-//    var mainCouroutine:
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    var mainCouroutine:TestCouroutinUtil =TestCouroutinUtil()
 
     @Before
     fun setupViewModel() {
