@@ -10,6 +10,7 @@ import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.FakeTaskRepository
 import com.example.todoapp.task.util.TasksFilterType
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
@@ -25,9 +26,9 @@ class TaskViewModelTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @ExperimentalCoroutinesApi
     @get:Rule
-    var mainCouroutine:TestCouroutinUtil =TestCouroutinUtil()
+    @ExperimentalCoroutinesApi
+    var mainCouroutine:TestCouroutinUtil = TestCouroutinUtil()
 
     @Before
     fun setupViewModel() {
@@ -87,12 +88,16 @@ class TaskViewModelTest {
 
 
     @Test
-    fun completeTask_dataAndSnackBarUpdated() {
+    fun completeTask_dataAndSnackBarUpdated()= mainCouroutine.runBlockingTest {
+
         taskViewModel.completeTask(task1, true)
 
         assertThat(tasksRepository.taskDataSource[task1.id]?.isCompleted!!, `is`(true))
 
+
         val snackbartest: Event<Int> = taskViewModel.snackbarText.`addObserver getOrAwaitValue`()
+
+
 
         assertThat(snackbartest.getContentIfNotHandled(), `is`(R.string.task_marked_complete))
     }

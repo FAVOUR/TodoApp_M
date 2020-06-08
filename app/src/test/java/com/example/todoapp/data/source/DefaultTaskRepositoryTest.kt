@@ -30,7 +30,7 @@ class DefaultTaskRepositoryTest(){
      fun  createRepository(){
          tasksRemoteDataSource = FakeDataSource(remoteTasks.toMutableList())
          tasksLocalDataSource = FakeDataSource(localTasks.toMutableList())
-         defaultTaskRepository= DefaultTaskRepository(tasksRemoteDataSource,tasksLocalDataSource,Dispatchers.Unconfined)
+         defaultTaskRepository= DefaultTaskRepository(tasksRemoteDataSource,tasksLocalDataSource,Dispatchers.Main)
      }
 
     @Test
