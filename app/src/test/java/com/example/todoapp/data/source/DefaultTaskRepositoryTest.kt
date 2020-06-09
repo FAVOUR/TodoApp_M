@@ -1,9 +1,11 @@
 package com.example.todoapp.data.source
 
+import android.util.Log
 import com.example.todoapp.FakeDataSource
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.remote.TaskRemoteDataSource
 import com.example.todoapp.util.Result
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.core.IsEqual
@@ -30,13 +32,15 @@ class DefaultTaskRepositoryTest(){
      fun  createRepository(){
          tasksRemoteDataSource = FakeDataSource(remoteTasks.toMutableList())
          tasksLocalDataSource = FakeDataSource(localTasks.toMutableList())
-         defaultTaskRepository= DefaultTaskRepository(tasksRemoteDataSource,tasksLocalDataSource,Dispatchers.Main)
+         defaultTaskRepository= DefaultTaskRepository(tasksRemoteDataSource,tasksLocalDataSource,Dispatchers.Unconfined)
      }
 
     @Test
     fun getTask_requestTaskFromRemoteDataSource(){
         runBlockingTest {
+
        val  task = defaultTaskRepository.getTask(isForceUpdate = true) as Result.Success
+            System.out.println("Data ${Gson().toJson(task)}")
 
               assertThat(task.data, IsEqual(remoteTasks))
 

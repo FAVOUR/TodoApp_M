@@ -82,6 +82,7 @@ class FakeTaskRepository :TaskRepository{
          Timber.d("Dummy tasks", "Added")
 
          for(task in tasks ) {
+
                 taskDataSource[task.id] = task
             }
         }
