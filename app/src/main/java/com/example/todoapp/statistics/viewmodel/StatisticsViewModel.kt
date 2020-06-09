@@ -16,6 +16,7 @@ class StatisticsViewModel(val defaultTaskRepository:TaskRepository) :ViewModel()
 
     private var mDataLoading = MutableLiveData<Boolean>(false)
 
+
     private val stats = task.map {
         if (it is Result.Success){
             getActiveAndCompletedStats(it.data)

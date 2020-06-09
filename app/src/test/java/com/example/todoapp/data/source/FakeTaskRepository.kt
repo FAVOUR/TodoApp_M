@@ -12,24 +12,34 @@ class FakeTaskRepository :TaskRepository{
 
     var taskDataSource :LinkedHashMap<String,Task> = LinkedHashMap()
     var  observableDataSource : MutableLiveData<Result<List<Task>>> = MutableLiveData()
+    private var shouldReturnError = false
 
 
+    fun setReturnError(value: Boolean) {
+        shouldReturnError = value
+    }
 
     override fun observeTasks(): LiveData<Result<List<Task>>> {
         runBlocking { refreshTasks() }
         return  observableDataSource
     }
 
-    override suspend fun getTask(isForceUpdate: Boolean): Result<List<Task>> {
-        Timber.d("Dummy tasks", "Gson().toJson(tasks)")
-
-        val tasks=  taskDataSource.values.toList()
-            Timber.d("Dummy tasks", Gson().toJson(tasks))
-           return  Result.Success(tasks)
-    }
 
     override suspend fun getTask(taskId: String, forceUpdate: Boolean): Result<Task> {
-        TODO("Not yet implemented")
+        if (shouldReturnError) {
+            return Result. Error(Exception("Test exception"))
+        }
+        taskDataSource[taskId]?.let {
+            return  Result.Success(it)
+        }
+        return  Result.Error(Exception("Could not find task"))
+    }
+
+    override suspend fun getTask(forceUpdate: Boolean): Result<List<Task>> {
+        if (shouldReturnError) {
+            return Result.Error(Exception("Test exception"))
+        }
+        return Result.Success(taskDataSource.values.toList())
     }
 
     override suspend fun refreshTasks() {

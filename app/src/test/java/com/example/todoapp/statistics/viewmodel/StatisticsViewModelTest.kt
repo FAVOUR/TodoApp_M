@@ -31,7 +31,7 @@ class StatisticsViewModelTest{
 
     @Test
     @ExperimentalCoroutinesApi
-    fun get_dataLoading(){
+    fun loadTask_dataLoading(){
 
         tasksRepository = FakeTaskRepository()
 
@@ -54,6 +54,22 @@ class StatisticsViewModelTest{
 
 
 
+    }
+
+    @Test
+    fun loadStatisticsWhenTasksAreUnavailable_callErrorToDisplay(){
+
+        tasksRepository = FakeTaskRepository()
+
+        statisticsViewModel = StatisticsViewModel(tasksRepository)
+
+        tasksRepository.setReturnError(true)
+
+        statisticsViewModel.refresh()
+
+        // Then empty and error are true (which triggers an error message to be shown).
+        assertThat(statisticsViewModel.empty.`addObserver getOrAwaitValue`(), `is`(true))
+        assertThat(statisticsViewModel.error.`addObserver getOrAwaitValue`(), `is`(true))
     }
 
 }
