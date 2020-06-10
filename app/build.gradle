@@ -36,9 +36,9 @@ android {
 }
 
 dependencies {
-//    debugImplementation ("androidx.fragment:fragment-testing:$fragmentVersion"){
-//        exclude group: 'androidx.test', module : 'core'
-//    }
+    debugImplementation ("androidx.fragment:fragment-testing:$fragmentVersion"){
+        exclude group: 'androidx.test', module : 'core'
+    }
     // App dependencies
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -96,16 +96,18 @@ dependencies {
     // Testing code should not be included in the main code.
     // Once https://issuetracker.google.com/128612536 is fixed this can be fixed.
 
-    implementation "androidx.fragment:fragment-testing:$fragmentVersion"
-    implementation "androidx.test:core:$androidXTestCoreVersion"
+//    implementation "androidx.fragment:fragment-testing:$fragmentVersion"
+//    implementation "androidx.test:core:$androidXTestCoreVersion"
 
 
     // AndroidX Test - UI /E2E testing
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+//    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
     androidTestImplementation "junit:junit:$junitVersion"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$archTestingVersion"
+
 
     // Dependencies for Android instrumented unit tests
     androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
