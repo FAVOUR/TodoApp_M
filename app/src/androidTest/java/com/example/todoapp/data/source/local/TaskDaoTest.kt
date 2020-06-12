@@ -20,6 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class TaskDaoTest {
 
@@ -44,7 +45,6 @@ class TaskDaoTest {
 
 
     @Test
-    @ExperimentalCoroutinesApi
     fun createTask_saveTask_taskItemEqualsSavedItem()= runBlockingTest{
         var task = Task("Androidx","Test")
 
@@ -65,7 +65,6 @@ class TaskDaoTest {
 
 
     @Test
-    @ExperimentalCoroutinesApi
     fun createTaskandInsertTask_updateTask_getTaskById () = runBlockingTest{
         var task = Task("Telli","Person")
         System.out.println("Task id  task ${task?.id}")
