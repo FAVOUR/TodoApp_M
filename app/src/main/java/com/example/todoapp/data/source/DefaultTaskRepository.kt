@@ -8,6 +8,7 @@ import com.example.todoapp.data.source.local.TaskLocalDataSource
 import com.example.todoapp.data.source.local.db.ToDoDataBase
 import com.example.todoapp.data.source.remote.TaskRemoteDataSource
 import com.example.todoapp.util.Result
+import com.example.todoapp.util.expressoCountDownIdlingWrapper
 import kotlinx.coroutines.*
 import javax.sql.DataSource
 
@@ -42,27 +43,32 @@ class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource
 
 
     override suspend fun getTask(isForceUpdate : Boolean):Result<List<Task>>{
-        if(isForceUpdate) {
-            try {
-                updateTasksFromRemoteDataSource()
-            } catch (e: Exception) {
-                Result.Error(e)
+        expressoCountDownIdlingWrapper {
+            if (isForceUpdate) {
+                try {
+                    updateTasksFromRemoteDataSource()
+                } catch (e: Exception) {
+                    Result.Error(e)
+                }
             }
+            return tasksLocalDataSource.getTasks()
         }
-        return tasksLocalDataSource.getTasks()
-
     }
 
     override suspend fun getTask(taskId: String, forceUpdate: Boolean): Result<Task> {
-        if (forceUpdate) {
-            updateTaskFromRemoteDataSource(taskId)
+        expressoCountDownIdlingWrapper {
+
+            if (forceUpdate) {
+                updateTaskFromRemoteDataSource(taskId)
+            }
+            return tasksLocalDataSource.getTask(taskId)
         }
-        return tasksLocalDataSource.getTask(taskId)
     }
 
-
     private suspend fun updateTasksFromRemoteDataSource(){
-          val remoteDataSource = tasksRemoteDataSource.getTasks()
+        expressoCountDownIdlingWrapper {
+
+        val remoteDataSource = tasksRemoteDataSource.getTasks()
 
           if (remoteDataSource is Result.Success){
               // Real apps might want to do a proper sync.
@@ -73,15 +79,19 @@ class DefaultTaskRepository (  private val tasksRemoteDataSource:TasksDataSource
           }else if (remoteDataSource is Result.Error){
                    throw remoteDataSource.exception
           }
-
+        }
     }
 
     private suspend fun updateTaskFromRemoteDataSource(taskId: String) {
-        val remoteTask = tasksRemoteDataSource.getTask(taskId)
+        expressoCountDownIdlingWrapper {
 
-        if (remoteTask is Result.Success) {
-            tasksLocalDataSource.saveTask(remoteTask.data)
+            val remoteTask = tasksRemoteDataSource.getTask(taskId)
+
+            if (remoteTask is Result.Success) {
+                tasksLocalDataSource.saveTask(remoteTask.data)
+            }
         }
+
     }
 
     override suspend fun refreshTasks(){

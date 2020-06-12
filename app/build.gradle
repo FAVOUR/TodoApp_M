@@ -71,6 +71,10 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    //idling resources
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+
+
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 

@@ -80,7 +80,7 @@ class MainActivityTest{
         onView(withText("TITLE1")).check(ViewAssertions.doesNotExist())
 
 
-        delay(5000)
+//        delay(5000)
 
 
         activitySenerio.close()
