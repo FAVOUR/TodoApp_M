@@ -5,8 +5,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import androidx.test.filters.SmallTest
-import com.example.todoapp.TestCouroutinUtil
+import com.example.todoapp.TestCouroutinUtilAT
+
 import com.example.todoapp.TodoApplication
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.local.db.ToDoDataBase
@@ -23,9 +23,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+//@MediumTest
+//@ExperimentalCoroutinesApi
+//@RunWith(AndroidJUnit4::class)
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
+@MediumTest
 class TaskLocalDataSourceTest{
 
     lateinit var dataBase: ToDoDataBase
@@ -36,7 +40,7 @@ class TaskLocalDataSourceTest{
 
     @get:Rule
     @ExperimentalCoroutinesApi
-    var mainCouroutine: TestCouroutinUtil = TestCouroutinUtil()
+    var mainCouroutine: TestCouroutinUtilAT = TestCouroutinUtilAT()
 
 
     @Before
@@ -56,7 +60,7 @@ class TaskLocalDataSourceTest{
 
 
     @Test
-    fun createTask_saveTask_getAllTask()=runBlockingTest{
+    fun createTask_saveTask_getAllTask()=mainCouroutine.runBlockingTest{
         var task = Task("New Task","Just inserted a Task")
 
         localDataSource.saveTask(task)
@@ -72,7 +76,7 @@ class TaskLocalDataSourceTest{
     }
 
     @Test
-    fun saveTask_completeTask_retrievedTaskIsComplete()=runBlockingTest{
+    fun saveTask_completeTask_retrievedTaskIsComplete()=mainCouroutine.runBlockingTest{
           //Given
         val task = Task("Task at first ","This Task will be completed")
 
@@ -81,14 +85,14 @@ class TaskLocalDataSourceTest{
         //When
         localDataSource.completeTask(task.copy(isCompleted = true))
 
-        val savedTask = localDataSource.getTask(task.id)
+        val _savedTask = localDataSource.getTask(task.id)
 
         //Assert
-        assertThat(savedTask.succeeded,`is` (true))
+        assertThat(_savedTask.succeeded,`is` (true))
 
-           savedTask as Task
-        assertThat(savedTask.id , `is` (task.id))
-        assertThat(savedTask.isCompleted , `is` (task.isCompleted))
+           _savedTask as Result.Success
+        assertThat(_savedTask.data.id , `is` (task.id))
+        assertThat(_savedTask.data.isCompleted , `is` (true))
 //        assertThat(savedTask.description , `is` (task.description))
 
 
