@@ -53,6 +53,9 @@ dependencies {
 //    kapt "androidx.room:room-compiler:$roomVersion"
 
 
+    implementation "androidx.test:core:$androidXTestCoreVersion"
+
+
     // Architecture Components
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
