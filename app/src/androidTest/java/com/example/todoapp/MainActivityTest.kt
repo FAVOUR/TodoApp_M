@@ -6,6 +6,7 @@ import android.graphics.ColorSpace.match
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions
@@ -16,6 +17,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.source.TaskRepository
+import com.example.todoapp.util.DataBindingIdlingResource
+import com.example.todoapp.util.ExpressoIdling
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -52,6 +55,20 @@ class MainActivityTest{
         ServiceLocator.resetRepository()
     }
 
+    val dataBindingResources = DataBindingIdlingResource()
+
+    @Before
+    fun setupIdlingResources(){
+        IdlingRegistry.getInstance().register(ExpressoIdling.countdownIdlingResource)
+      IdlingRegistry.getInstance().register(dataBindingResources)
+    }
+
+
+    @After
+    fun unRegisterIdlingResource(){
+        IdlingRegistry.getInstance().unregister(ExpressoIdling.countdownIdlingResource)
+        IdlingRegistry.getInstance().unregister(dataBindingResources)
+    }
 
     @Test
     fun editText()= runBlocking {
