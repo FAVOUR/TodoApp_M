@@ -38,13 +38,8 @@ class MainActivityTest{
     val dataBindingResources = DataBindingIdlingResource()
 
 
-//    @ExperimentalCoroutinesApi
-//    @get:Rule
-//    var testCouroutine= TestCouroutinUtilAT()
-
     @Before
     fun  setUp(){
-//        val context=ApplicationProvider.getApplicationContext<TodoApplication>()
          repository=  ServiceLocator.provideRepository(getApplicationContext())
 
         runBlocking{
