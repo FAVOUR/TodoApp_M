@@ -1,7 +1,15 @@
 package com.example.todoapp
 
+import android.app.Activity
+import android.graphics.ColorSpace.match
+import android.view.Gravity
+import androidx.appcompat.widget.Toolbar
 import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.DrawerMatchers.isClosed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.todoapp.util.DataBindingIdlingResource
@@ -41,8 +49,10 @@ class AppNavigationTest {
 
         // 1. Check that left drawer is closed at startup.
 
-        // 2. Open drawer by clicking drawer icon.
+        onView(withId(R.id.nav_drawer)).check(matches(isClosed(Gravity.START)))
 
+        // 2. Open drawer by clicking drawer icon.
+         onView(withId((R.id.nav_drawer))).perform()
         // 3. Check if drawer is open.
 
         // When using ActivityScenario.launch(), always call close()
@@ -51,4 +61,14 @@ class AppNavigationTest {
 
 
 
+
+
+    fun <T : Activity> ActivityScenario<T>.getToolbarNavigationContentDescription(): String {
+        var description = ""
+        onActivity {
+            description =
+                it.findViewById<Toolbar>(R.id.toolbar).navigationContentDescription as String
+        }
+        return description
+    }
 }
