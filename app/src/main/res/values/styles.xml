@@ -11,20 +11,18 @@
 
 
 
-<!--
     <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        &lt;!&ndash; For Android sdk versions 26+. &ndash;&gt;
-&lt;!&ndash;        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/opensans_font</item>&ndash;&gt;
-        &lt;!&ndash; Target Android sdk versions < 26 and > 14. &ndash;&gt;
-&lt;!&ndash;        <item name="fontFamily">@font/opensans_font</item>&ndash;&gt;
-        &lt;!&ndash; sets the style for the overflow button &ndash;&gt;
-&lt;!&ndash;        <item name="actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>&ndash;&gt;
+        <!-- For Android sdk versions 26+. -->
+<!--        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/opensans_font</item>-->
+        <!-- Target Android sdk versions < 26 and > 14. -->
+<!--        <item name="fontFamily">@font/opensans_font</item>-->
+        <!-- sets the style for the overflow button -->
+<!--        <item name="actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>-->
     </style>
--->
 
     <style name="Toolbar">
         <item name="android:textColorPrimary">@android:color/white</item>

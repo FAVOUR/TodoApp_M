@@ -7,8 +7,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.DrawerMatchers.isClosed
+import androidx.test.espresso.contrib.DrawerMatchers.isOpen
+import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -52,9 +55,9 @@ class AppNavigationTest {
         onView(withId(R.id.nav_drawer)).check(matches(isClosed(Gravity.START)))
 
         // 2. Open drawer by clicking drawer icon.
-         onView(withId((R.id.nav_drawer))).perform()
+         onView(withContentDescription(activityScenario.getToolbarNavigationContentDescription())).perform(click())
         // 3. Check if drawer is open.
-
+         onView(withId(R.id.nav_drawer)).check(matches(isOpen(Gravity.START)))
         // When using ActivityScenario.launch(), always call close()
         activityScenario.close()
     }
