@@ -8,6 +8,7 @@ import androidx.room.Room
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -34,26 +35,26 @@ import org.junit.runner.RunWith
 class AppNavigationTest {
 
     val dataBindingIdlingResource =DataBindingIdlingResource()
-     lateinit var  taskRepository : TaskRepository
+     lateinit var  tasksRepository : TaskRepository
      lateinit var  taskDataBase : ToDoDataBase
 
     @Before
     fun init(){
-        taskDataBase= Room.inMemoryDatabaseBuilder(getApplicationContext(),ToDoDataBase::class.java)
-                            .allowMainThreadQueries()
-                            .build()
+//        taskDataBase= Room.inMemoryDatabaseBuilder(getApplicationContext(),ToDoDataBase::class.java)
+//                            .allowMainThreadQueries()
+//                            .build()
 
-        taskRepository =  ServiceLocator.provideRepository(getApplicationContext())
+        tasksRepository =  ServiceLocator.provideRepository(getApplicationContext())
 
         runBlocking {
-            taskRepository.deleteAllTasks()
+            tasksRepository.deleteAllTasks()
         }
 
     }
 
     @After
     fun resetDetails(){
-        taskDataBase.close()
+        ServiceLocator.resetRepository()
     }
 
 
@@ -95,7 +96,7 @@ class AppNavigationTest {
     @Test
     fun taskDetailScreen_doubleUpButton() = runBlocking {
         val task = Task("Up button", "Description")
-        taskRepository.saveTask(task)
+        tasksRepository.saveTask(task)
 
         // Start the Tasks screen.
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
@@ -119,7 +120,30 @@ class AppNavigationTest {
 
 
 
+    @Test
+    fun taskDetailScreen_doubleBackButton() = runBlocking {
+        val task = Task("Back button", "Description")
+        tasksRepository.saveTask(task)
 
+        // Start Tasks screen.
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+
+        // 1. Click on the task on the list.
+
+        onView(withText("Back button")).perform(click())
+        // 2. Click on the Edit task button.
+
+        onView(withId(R.id.edit_task_fab)).perform(click())
+        // 3. Confirm that if we click Back once, we end up back at the task details page.
+         pressBack()
+        onView(withId(R.id.task_detail_description_text)).check(matches(isDisplayed()))
+        // 4. Confirm that if we click Back a second time, we end up back at the home screen.
+        pressBack()
+        onView(withId(R.id.tasks_container_layout)).check(matches(isDisplayed()))
+        // When using ActivityScenario.launch(), always call close()
+        activityScenario.close()
+    }
 
 
 
