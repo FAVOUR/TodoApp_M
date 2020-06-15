@@ -108,12 +108,6 @@ class MainActivityTest{
         // 1. Start TasksActivity.
        val activityScenerio = ActivityScenario.launch(MainActivity::class.java)
         dataBindingResources.monitorActivity(activityScenerio)
-//
-//        onView(withText(task.title)).perform(click())
-//        onView(withId(R.id.task_detail_title_text)).check(matches(withText(task.title)))
-//        onView(withId(R.id.task_detail_description_text)).check(matches(withText(task.description)))
-//        onView(withId(R.id.edit_task_fab)).perform(click())
-//
 
         // 2. Add an active task by clicking on the FAB and saving a new task.
         onView(withId(R.id.add_task_fab)).perform(click())
